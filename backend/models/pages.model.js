@@ -9,13 +9,17 @@ const pageSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    createdPages: [{
+    subPagesForTodo: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Subpage'
     }],
-    tags: [{
+    // Tags like project, work and personal
+    tags: [{ 
         type: String,
-    }]
+    }],
+    lastEdited: {
+        type: Date
+    }
 }, { timestamps: true })
 
 export const Page = mongoose.model('Page', pageSchema)
