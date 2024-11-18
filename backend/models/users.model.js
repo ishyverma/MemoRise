@@ -18,7 +18,6 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Password is required'],
         minlength: [6, 'Password should be at least 6 characters long'],
-        maxlength: [12, 'Password should not exceed 12 characters']
     },
     OAuthId: {
         type: String,
@@ -26,9 +25,6 @@ const userSchema = new Schema({
     OAuthProvider: {
         type: String,
         enum: ['Google', 'Github'],
-        required: () => {
-            return this.OAuthId
-        }
     },
     profilePicture: {
         type: String,
