@@ -1,14 +1,14 @@
 import jwt from 'jsonwebtoken'
+import { User } from '../models/users.model.js'
 
-export const authenticator = (req, res, next) => {
-    const { token } = req.headers
+export const authenticator = async (req, res, next) => {
+    const token = req.cookies?.accessToken || req.headers["authorization"].replace("Bearer ", "")
     try {
-        const verifyData = jwt.verify(token, process.env.JWT_SECRET)
+        const verifyData = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+        console.log(verifyData)
         if (verifyData) {
-            const email = verifyData.email
-            const username = verifyData.username
-            req.email = email
-            req.username = username
+            const user = await User.findById(verifyData.id)
+            req.user = user
             next()
         } else {
             req.status(404).json({

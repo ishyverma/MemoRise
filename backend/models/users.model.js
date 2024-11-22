@@ -33,6 +33,14 @@ const userSchema = new Schema({
         type: String,
         enum: ['user', 'admin'],
         default: 'user'
+    },
+    accessToken: {
+        type: String,
+        unique: true
+    },
+    refreshToken: {
+        type: String,
+        unique: true
     }
 }, { timestamps: true })
 
