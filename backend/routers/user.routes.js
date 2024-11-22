@@ -72,6 +72,7 @@ router.post('/login', async (req, res) => {
 
                 user.accessToken = accessToken
                 user.refreshToken = refreshToken
+                user.save()
 
                 res
                 .cookie("accessToken", accessToken, options)
